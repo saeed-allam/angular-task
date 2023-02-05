@@ -1,0 +1,206 @@
+/* You can add global styles to this file, and also import other style files */
+// Mode
+$mode: default;
+
+// Initialize
+@import './app/core/sass/init';
+
+// Components
+@import './app/core/sass/components/components';
+
+@import "./app/core/sass/components/variables";
+@import "./app/core/sass/components/forms/form-select";
+@import "./app/core/sass/components/forms/form-control";
+@import "./app/core/sass/components/forms/form-check";
+
+// Layout
+@import './app/core/sass/layout/layout';
+@import './app/core/sass/layout/docs/layout';
+// 7: Custom import
+@import '~@ng-select/ng-select/themes/default.theme.css';
+// Arabic Font
+@import './app/core/sass/fonts/arabic';
+
+.w-50 {
+  width: 50%;
+}
+
+.border-radius-0 {
+  border-radius: 0;
+}
+
+.tooltip {
+  font-family: inherit;
+  position: absolute;
+}
+
+
+
+
+// ng-select {
+//   font-size: 1.21rem;
+//   font-weight: 500;
+//   line-height: 1.5;
+//   transition: color 0.2s ease, background-color 0.2s ease;
+//   border-radius: 0.475rem;
+// }
+
+ng-select .ng-select-container,select .ng-select-container {
+  background-color: #f5f8fa !important;
+  color: #5e6278 !important;
+  background-clip: padding-box !important;
+  border: 1px solid #f5f8fa !important;
+  font-size: 1.21rem;
+  padding: 0.75rem 1rem !important;
+  height: 44px !important;
+}
+
+// ng-select .ng-select-container .ng-value-container .ng-input>input {
+//   color: #5e6278 !important;
+//   font-size: 1.21rem;
+// }
+
+// input.is-invalid,
+// select.is-invalid,
+// textarea.is-invalid,
+// ng-select.is-invalid .ng-select-container {
+//   color: #b94a48;
+//   background-color: #f2dede !important;
+//   border: 1px solid #eed3d7 !important;
+// }
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+ng-select.ng-select-single .ng-select-container .ng-value-container,
+ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value{
+  font-size: 1.21rem !important;
+}
+
+.no-border-radius {
+  border-radius: 0;
+}
+
+
+.border-radius-100 {
+  border-radius: 100%;
+}
+
+.background-white {
+  background-color: white;
+}
+
+.invalid-feedback {
+  display: block !important;
+}
+
+.tooltip {
+  font-family: inherit;
+  position: absolute;
+}
+
+.white {
+  color: white !important;
+}
+
+.ng-dropdown-panel {
+  z-index: 10050 !important;
+}
+
+.ff-Arabic-Bold {
+  font-family: Arabic-Bold;
+}
+
+.min-width-150 {
+  min-width: 150px;
+}
+
+.min-width-180 {
+  min-width: 180px;
+}
+
+.min-width-220 {
+  min-width: 220px;
+}
+
+#loader-logo {
+  width: 200px;
+}
+
+.gray-background {
+  background-color: #f8fafb;
+}
+
+.table-separator-bottom {
+  border-bottom: 2px dashed #e4e6ef !important;
+}
+
+.table-separator-top {
+  border-top: 2px dashed #e4e6ef !important;
+}
+
+.border-radius-0 {
+  border-radius: 0 !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+
+.btn-group.rtl>.btn:not(:last-child):not(.dropdown-toggle),
+.btn-group.rtl>.btn.dropdown-toggle-split:first-child,
+.btn-group.rtl>.btn-group:not(:last-child)>.btn {
+  border-top-right-radius: 0.475rem;
+  border-bottom-right-radius: 0.475rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-group.rtl>.btn:nth-child(n + 3),
+.btn-group.rtl> :not(.btn-check)+.btn,
+.btn-group.rtl>.btn-group:not(:first-child)>.btn {
+  border-top-left-radius: 0.475rem;
+  border-bottom-left-radius: 0.475rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mw-160px {
+  max-width: 160px;
+}
+
+// =========================================
+// @media (max-width: 425px) {
+//   .searchListMobile {
+//     flex-wrap: wrap !important;
+//     justify-content: center !important;
+//   }
+
+//   .listTable {
+//     display: flex !important;
+//   }
+
+//   .searchWidth {
+//     width: auto !important;
+//     margin: 5px 0 !important;
+//   }
+
+//   .dF-Column {
+//     display: flex !important;
+//     flex-direction: column !important;
+//   }
+
+//   .modal-lg {
+
+//     display: flex;
+//     height: 85%;
+//     overflow: auto;
+
+//     .modal-content {
+
+//       overflow: auto;
+//     }
+//   }
+// }

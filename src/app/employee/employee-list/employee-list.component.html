@@ -1,0 +1,222 @@
+<div class="container-fluid">
+    <div class=" d-flex flex-column flex-lg-row">
+        <div class="flex-column flex-lg-row-auto w-30 w-lg-30px mb-10 mb-lg-0 mt-5" *ngIf="!showMenu">
+            <a class="btn btn-sm btn-primary btn-icon" (click)="toggleMenu()">
+                <span class="svg-icon svg-icon-3">
+                    <i class="fa-solid fa-forward-fast"></i>
+                </span>
+            </a>
+        </div>
+        <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 mb-lg-0" *ngIf="showMenu">
+            <div class="card card-flush mb-0" data-kt-sticky="false" data-kt-sticky-name="inbox-aside-sticky"
+                data-kt-sticky-offset="{default: false, xl: '0px'}" data-kt-sticky-width="{lg: '275px'}"
+                data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false"
+                data-kt-sticky-zindex="95">
+                <div class="card-body p-0">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h2>Filters</h2>
+                        </div>
+                        <div class="card-toolbar">
+                            <a class="btn btn-sm btn-light btn-icon" (click)="toggleMenu()">
+                                <span class="svg-icon svg-icon-3">
+                                    <i class="fa-solid fa-backward-fast"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <form [formGroup]="searchForm" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework m-5">
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="fs-5 fw-bold mb-2">Name</label>
+                            <input class="form-control form-control-solid" placeholder="name" name="name"
+                                [formControl]="search" formControlName="name">
+                        </div>
+                        <div class="mb-5 ">
+                            <label class="form-label">Employment Date</label>
+                            <input type="text" class="form-control form-control-solid" bsDatepicker
+                                [bsConfig]="employeeSer.datePickerConfig" formControlName="employmentDate" autocomplete="off" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="form-label">Department Name</label>
+                            <ng-select formControlName="department" name="department">
+                                <ng-option *ngFor="let department of employeeSer.departmentList"
+                                    [value]="department.departmentId">{{department.departmentName}}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="mb-5">
+                            <label class="fs-5 fw-bold mb-2">Salary</label>
+                            <input type="number" class="form-control form-control-solid" formControlName="salary"
+                                name="salary" placeholder="salary">
+                        </div>
+                        <div class="mb-5">
+                            <label class="form-label">Experience</label>
+                            <ng-select formControlName="experience" [multiple]='true' [maxSelectedItems]="2"
+                                [closeOnSelect]="false">
+                                <ng-option value="1">Less than a year</ng-option>
+                                <ng-option value="2">From 1-3 years</ng-option>
+                                <ng-option value="3">3 years or above</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="d-flex justify-content-evenly">
+                            <button type="button" class="btn btn-light btn-active-light-primary fw-bold px-6"
+                                (click)="reset()" data-kt-menu-dismiss="true">
+                                NewSearch</button>
+                            <button type="button" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true"
+                                (click)="onSubmit();" data-kt-user-table-filter="filter"> Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10 card">
+
+            <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                <div class="card-title">
+                    <div class="d-flex align-items-center position-relative my-1 me-5">
+                        <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">Employees</h1>
+                    </div>
+                </div>
+                <div class="card-toolbar">
+                    <button type="button" class="btn btn-light-primary" (click)="operation(operationModal)">
+                        <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
+                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                    transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
+                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
+                            </svg>
+                        </span>
+                        Add Employee</button>
+                </div>
+            </div>
+
+            <div class="card-body pt-0">
+                <ng-container *ngIf="(employeeSer.list | filter: {name: search.value}) as filterData">
+                    <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="table-responsive" *ngIf="filterData.length > 0; else noDataTemplate">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                                <thead style="text-align-last: center;">
+                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>EmploymentDate</th>
+                                        <th>Salary</th>
+                                        <th>Experience</th>
+                                        <th>Department</th>
+                                        <th>tools</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="fw-semibold text-gray-600 text-center">
+                                    <tr *ngFor="let item of filterData;let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.employmentDate}}</td>
+                                        <td>{{item.salary}}</td>
+                                        <td>{{item.experience}}</td>
+                                        <td class="text-center">
+                                            {{(employeeSer.departmentList|filterById:'departmentId':item.department)[0]?.departmentName}}
+                                        </td>
+
+                                        <td>
+                                            <a class="btn btn-icon btn-light-success btn-circle btn-sm m-2"
+                                                tooltip="Edit" (click)="operation(operationModal, item)">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-icon btn-light-danger btn-circle btn-sm m-2"
+                                                tooltip="Delete" (click)="employeeSer.delete(item.employeeId)">
+                                                <i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #noDataTemplate>
+                            <div class="text-center">
+                                <img class="mx-auto col-lg-6 col-10" src="assets/image/5.png" />
+                                <h1>NO DATA</h1>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #operationModal>
+    <div class="card ">
+        <div class="card-header border-b">
+            <h3 class="card-title align-items-start flex-column" *ngIf="f.employeeId.value == null">
+                <span class="card-label fw-bolder fs-3 mb-1">Add</span>
+            </h3>
+            <h3 class="card-title align-items-start flex-column" *ngIf="f.employeeId.value > 0">
+                <span class="card-label fw-bolder fs-3 mb-1">Edit</span>
+            </h3>
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-3 pe-2  border-radius-100"
+                    tooltip="Close" (click)="modalRef.hide()">
+                    <i class="fa-solid fa-xmark fs-3"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body py-0 pt-2">
+            <form [formGroup]="employeeForm">
+                <div class="row">
+                    <div class="card card-custom gutter-b">
+                        <div class="form-group col-md-12">
+                            <label class="fs-5 fw-bold my-2">
+                                Name</label>
+                            <input type="text" class="form-control form-control-solid" formControlName="name"
+                                name="name" placeholder="Name"
+                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        </div>
+                        <ng-container *ngIf="submitted && f.name.errors">
+                            <div class="invalid-feedback" *ngIf="f.name.errors.required">
+                                Name IsRequired
+                            </div>
+                        </ng-container>
+
+                        <div class="mb-5 ">
+                            <label class="form-label">Employment Date</label>
+                            <input type="text" class="form-control form-control-solid" bsDatepicker
+                                [bsConfig]="employeeSer.datePickerConfig" formControlName="employmentDate"
+                                autocomplete="off" />
+                        </div>
+                        <div class="mb-5">
+                            <label class="form-label">Department Name</label>
+                            <ng-select formControlName="department">
+                                <ng-option *ngFor="let department of employeeSer.departmentList"
+                                    [value]="department.departmentId">{{department.departmentName}}</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="mb-5">
+                            <label class="fs-5 fw-bold mb-2">Salary</label>
+                            <input type="number" class="form-control form-control-solid" formControlName="salary"
+                                name="salary" placeholder="salary">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer text-center px-0">
+                    <button type="button" class="btn btn-secondary btn-sm mx-1" (click)="modalRef.hide()">
+                        <i class="fa fa-arrow-left"></i>
+                        <span> Back </span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm mx-1"
+                        (click)="employeeSer.delete(f.employeeId.value);modalRef.hide()" *ngIf="f.employeeId.value != null">
+                        <span> Delete </span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm mx-1" [disabled]="requestSent"
+                        (click)="onSubmitOperation()">
+                        <i class="fa fa-save"></i>
+                        <span> Save </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
