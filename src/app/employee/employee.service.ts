@@ -26,7 +26,7 @@ export class EmployeeService {
         },
         error: err => {
           this.list = [
-            { employeeId: 1, name: 'John wicks', employmentDate: '12/1/2020', salary: '2000', experience: null, department: 1 },
+            { employeeId: 1, name: 'saeed allam', employmentDate: '12/1/2020', salary: '2000', experience: null, department: 1 },
             { employeeId: 2, name: 'George', employmentDate: '5/10/2018', salary: '5000', experience: null, department: 2 },
             { employeeId: 3, name: 'Alfied', employmentDate: '15/2/2021', salary: '2000', experience: null, department: 2 },
             { employeeId: 4, name: 'Charilote', employmentDate: '1/1/2022', salary: '4000', experience: null, department: 1 },
